@@ -106,12 +106,12 @@ export default function Transactions() {
                 />
               </div>
               
-              <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+              <Select value={categoryFilter || "all"} onValueChange={(value) => setCategoryFilter(value === "all" ? "" : value)}>
                 <SelectTrigger className="w-48" data-testid="select-category-filter">
                   <SelectValue placeholder="All Categories" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Categories</SelectItem>
+                  <SelectItem value="all">All Categories</SelectItem>
                   {categories.map((category: string) => (
                     <SelectItem key={category} value={category}>
                       {category}

@@ -71,8 +71,8 @@ export class MemStorage implements IStorage {
   }
 
   private initializeMockData() {
-    // Create a test user
-    const userId = randomUUID();
+    // Create a test user with consistent ID
+    const userId = "testuser";
     const user: User = {
       id: userId,
       username: "testuser",

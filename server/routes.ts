@@ -112,6 +112,23 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Categorize expense with AI
+  app.post("/api/transactions/:userId/categorize", async (req, res) => {
+    try {
+      const { description, amount, merchant } = req.body;
+      
+      if (!description) {
+        return res.status(400).json({ message: "Description is required" });
+      }
+      
+      const categorization = await categorizeExpense(description, parseFloat(amount || 0));
+      res.json(categorization);
+    } catch (error) {
+      console.error("Categorization error:", error);
+      res.status(500).json({ message: "Failed to categorize expense" });
+    }
+  });
+
   // Upload and analyze receipt
   app.post("/api/receipts/analyze", async (req, res) => {
     try {

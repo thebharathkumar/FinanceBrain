@@ -14,6 +14,10 @@ export const api = {
   createTransaction: (transaction: any) =>
     apiRequest("POST", "/api/transactions", transaction).then(res => res.json()),
   
+  // AI Functions
+  categorizeExpense: (description: string, amount: number, userId: string) =>
+    apiRequest("POST", `/api/transactions/${userId}/categorize`, { description, amount }).then(res => res.json()),
+  
   // Receipts
   analyzeReceipt: (image: string, userId: string) =>
     apiRequest("POST", "/api/receipts/analyze", { image, userId }).then(res => res.json()),
